@@ -7,6 +7,10 @@
 
         <class>ir.maktab.entity.User</class>
         <class>ir.maktab.entity.Book</class>
+        <class>ir.maktab.entity.Loan</class>
+        <class>ir.maktab.entity.Wallet</class>
+        <class>ir.maktab.entity.Address</class>
+
 
         <properties>
             <property name="jakarta.persistence.jdbc.url"
@@ -15,7 +19,7 @@
             <property name="jakarta.persistence.jdbc.password" value="1234"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="false"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
 
     </persistence-unit>

@@ -2,6 +2,7 @@ package ir.maktab.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -14,11 +15,14 @@ import java.time.LocalDate;
 public class Loan {
     @Id
     private Integer loanId;
-    private Integer userId;
-    private Integer bookId;
+    @ManyToOne
+    private Book book;
+    @ManyToOne
+    private User user;
     private LoanStatus loanStatus;
     private LocalDate borrowDate;
     private LocalDate dueDate;
+
 
 }
 
