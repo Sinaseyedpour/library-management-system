@@ -1,6 +1,8 @@
-import ir.maktab.entity.User;
-import ir.maktab.entity.Wallet;
+import ir.maktab.entity.*;
+import ir.maktab.repository.BookRepository;
+import ir.maktab.repository.LoanRepository;
 import ir.maktab.repository.UserRepository;
+import ir.maktab.service.LoanService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -21,7 +23,7 @@ void main() {
     EntityTransaction transaction = entityManager.getTransaction();
     transaction.begin();
 //    UserRepository userRepository = new UserRepository();
-//    System.out.println("userRepository.findAll() = " + userRepository.findAll());
+//    System.out.println("userRepository.findAll() = " + userRepository.findAll())
 //    User user = new User(10, "sina", "1234");
 //    Wallet wallet = new Wallet(12, 0, user);
 //    user.setWallet(wallet);
@@ -29,5 +31,18 @@ void main() {
 //    entityManager.persist(wallet);
 //    User findUser = entityManager.find(User.class, 10);
 //    System.out.println(findUser);
+
+    User user = new User("sina", "1234");
+    Book book = new Book("it", "sina", 1234);
+    Loan loan = new Loan(book, user, LoanStatus.ACTIVE, LocalDate.now());
+    UserRepository userRepository = new UserRepository();
+    BookRepository bookRepository = new BookRepository();
+    LoanRepository loanRepository = new LoanRepository();
+    userRepository.save(user);
+    bookRepository.save(book);
+    loanRepository.save(loan);
+
+    LoanService loanService = new LoanService(userRepository, bookRepository, loanRepository);
+    System.out.println("loanService.findLoansByStatus(LoanStatus.ACTIVE) = " + loanService.findLoansByStatus(LoanStatus.ACTIVE));
     transaction.commit();
 }

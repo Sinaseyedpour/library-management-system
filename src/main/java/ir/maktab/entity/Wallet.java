@@ -1,8 +1,6 @@
 package ir.maktab.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,10 +12,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Wallet {
+    public static final String TABLE_NAME = "wallet";
     @Id
+    @GeneratedValue
     private int id;
     private int balance;
-    @OneToOne
+
+    @ManyToOne
     private User user;
 
     @Override

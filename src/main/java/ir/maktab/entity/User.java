@@ -22,12 +22,23 @@ public class User {
     private String username;
     private String password;
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public static final String TABLE_NAME = "users";
 
 //    @ManyToMany
 //    private List<Book> books;
     @OneToMany(mappedBy = "user")
     private List<Loan> loans;
+
+    @OneToMany(mappedBy = "user")
+    private List<Wallet> wallet;
+
+    @OneToMany(mappedBy = "user")
+    private List<Address> address;
 
     private Integer borrowLimit = 2;
 
@@ -36,7 +47,6 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", borrowLimit=" + borrowLimit +
                 '}';
     }

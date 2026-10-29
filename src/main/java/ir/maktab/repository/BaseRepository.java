@@ -1,10 +1,7 @@
 package ir.maktab.repository;
 
 import ir.maktab.entity.User;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -16,8 +13,11 @@ public abstract class BaseRepository<E> {
     protected abstract Class<E> getclass ();
     protected abstract String getTableName ();
 
-    void save(E entity) {
+    public void save(E entity) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
         entityManager.persist(entity);
+        transaction.commit();
     }
 
     public void update(E entity) {

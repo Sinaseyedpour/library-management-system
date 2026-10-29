@@ -12,10 +12,12 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Address {
+    public static final String TABLE_NAME = "address";
     @Id
     private int id;
     private String city;
     private String street;
+
     @ManyToOne
     private User user;
 

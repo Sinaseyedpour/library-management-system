@@ -22,8 +22,13 @@ public class Book {
     private String author;
     private Integer ISBN;
 
-    public static final String TABLE_NAME = "books";
+    public static final String TABLE_NAME = "book";
 
+    public Book(String title, String author, Integer ISBN) {
+        this.title = title;
+        this.author = author;
+        this.ISBN = ISBN;
+    }
 //    @ManyToMany(mappedBy = "books")
 //    private List<User> users;
 
