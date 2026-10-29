@@ -2,6 +2,7 @@ package ir.maktab.service;
 
 import ir.maktab.entity.Loan;
 import ir.maktab.entity.LoanStatus;
+import ir.maktab.entity.User;
 import ir.maktab.repository.BookRepository;
 import ir.maktab.repository.LoanRepository;
 import ir.maktab.repository.UserRepository;
@@ -19,13 +20,7 @@ public class LoanService {
         this.bookRepository = bookRepository;
         this.loanRepository = loanRepository;
     }
-
     public List<Loan> findLoansByStatus(LoanStatus status) {
         return loanRepository.findLoansByStatus(status);
-    }
-
-    public Loan findActiveLoanByBookId(Long bookId) {
-
-        return loanRepository.findActiveLoanByBookId(bookId);
     }
 }
