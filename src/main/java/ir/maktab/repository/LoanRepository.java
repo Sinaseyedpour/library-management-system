@@ -22,16 +22,14 @@ public class LoanRepository extends BaseRepository<Loan> {
 
     public Loan findActiveLoanByBookId(Long bookId) {
 
-        Query query = entityManager.createQuery(
-                "SELECt l FROM Loan l WHERE l.book.id = ?1 AND l.loanStatus = ACTIVE ", Loan.class);
+        String s = "SELECt l FROM Loan l WHERE l.book.id = ?1 AND l.loanStatus = ACTIVE ";
 
-        List<Loan> resultList = query.setParameter(1, bookId)
-                .getResultList();
-
-        return resultList.getFirst();
+        return entityManager.createQuery(s, Loan.class)
+                .setParameter(1, bookId)
+                .getSingleResult();
     }
 
-    public List<Loan> findLoansByMemberId(Long memberId){
+    public List<Loan> findLoansByMemberId(Long memberId) {
 
         return entityManager.createQuery(
                         "SELECT l FROM Loan l WHERE l.user.id = ?1", Loan.class)
