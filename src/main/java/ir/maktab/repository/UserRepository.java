@@ -15,4 +15,10 @@ public class UserRepository extends BaseRepository<User> {
 
         return User.TABLE_NAME;
     }
+
+    public User findByEmail(String email) {
+        return entityManager.createQuery(
+                "SELECT u from User u where u.email = ?1", User.class
+        ).setParameter(1, email).getSingleResult();
+    }
 }

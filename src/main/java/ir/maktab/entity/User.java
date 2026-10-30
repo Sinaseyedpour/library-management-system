@@ -21,6 +21,7 @@ public class User {
     private Integer id;
     private String username;
     private String password;
+    private String Email;
 
     public User(String username, String password) {
         this.username = username;
