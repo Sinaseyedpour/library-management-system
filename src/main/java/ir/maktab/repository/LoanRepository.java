@@ -2,7 +2,6 @@ package ir.maktab.repository;
 
 import ir.maktab.entity.Loan;
 import ir.maktab.entity.LoanStatus;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
 import java.time.LocalDate;
@@ -21,7 +20,7 @@ public class LoanRepository extends BaseRepository<Loan> {
         return query.getResultList();
     }
 
-    public Loan findActiveLoanByBookId(Long bookId) {
+    public Loan findActiveLoanByBookId(Integer bookId) {
 
         String s = "SELECt l FROM Loan l WHERE l.book.id = ?1 AND l.loanStatus = ACTIVE ";
 
@@ -30,7 +29,7 @@ public class LoanRepository extends BaseRepository<Loan> {
                 .getSingleResult();
     }
 
-    public List<Loan> findLoansByMemberId(Long memberId) {
+    public List<Loan> findLoansByMemberId(Integer memberId) {
 
         return entityManager.createQuery(
                         "SELECT l FROM Loan l WHERE l.user.id = ?1", Loan.class)
@@ -38,21 +37,21 @@ public class LoanRepository extends BaseRepository<Loan> {
                 .getResultList();
     }
 
-    public List<Loan> findLoansByBookId(Long bookId) {
+    public List<Loan> findLoansByBookId(Integer bookId) {
         return entityManager.createQuery(
                         "select l FROM Loan l where l.book.id = ?1", Loan.class)
                 .setParameter(1, bookId)
                 .getResultList();
     }
 
-    public long countActiveLoansByMemberId(Long memberId) {
+    public long countActiveLoansByMemberId(Integer memberId) {
         return entityManager.createQuery("select COUNT (l) From Loan l where l.loanStatus = ACTIVE AND l.user.id = ?1", Long.class)
                 .setParameter(1, memberId)
                 .getSingleResult();
     }
 
     public List<Loan> getOverdueLoans() {
-        return entityManager.createQuery("select l FROM Loan l where l.dueDate < ?1 AND l.loanStatus = ACTIVE",Loan.class)
+        return entityManager.createQuery("select l FROM Loan l where l.dueDate < ?1 AND l.loanStatus = ACTIVE", Loan.class)
                 .setParameter(1, LocalDate.now())
                 .getResultList();
 

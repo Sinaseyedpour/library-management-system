@@ -2,7 +2,7 @@ import ir.maktab.entity.*;
 import ir.maktab.repository.BookRepository;
 import ir.maktab.repository.LoanRepository;
 import ir.maktab.repository.UserRepository;
-import ir.maktab.service.LoanService;
+import ir.maktab.service.LoanServiceImpl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -42,7 +42,7 @@ void main() {
     bookRepository.save(book);
     loanRepository.save(loan);
 
-    LoanService loanService = new LoanService(userRepository, bookRepository, loanRepository);
-    System.out.println("loanService.findLoansByStatus(LoanStatus.ACTIVE) = " + loanService.findLoansByStatus(LoanStatus.ACTIVE));
+    LoanServiceImpl loanServiceImpl = new LoanServiceImpl(userRepository, bookRepository, loanRepository);
+    System.out.println("loanService.findLoansByStatus(LoanStatus.ACTIVE) = " + loanServiceImpl.findLoansByStatus(LoanStatus.ACTIVE));
     transaction.commit();
 }
